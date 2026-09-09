@@ -76,7 +76,7 @@
     </style>
   </head>
   <body>
-    <!-- Sate-of-the-art Luxury Loader Matrix -->
+    <!-- Luxury Loader Dynamic Interface -->
     <div id="loading-screen">
       <div class="gem-ring">
         <div class="gem-particle"></div>
@@ -102,7 +102,7 @@
           loader.style.opacity = '0';
           setTimeout(function() { loader.style.display = 'none'; }, 500);
         }
-      }, 5000); // 5000ms = 5 Seconds Duration
+      }, 5000);
     </script>
 
     <!-- stlite JS -->
@@ -119,13 +119,13 @@ import streamlit.components.v1 as components
 # Page configuration for desktop and mobile scaling
 st.set_page_config(page_title="MJ GEMS Admin Portal", page_icon="💎", layout="centered")
 
-# --- CUSTOM CSS FOR LUXURY BACKGROUND & MOBILE STYLING ---
+# --- CUSTOM CSS FOR LUXURY BACKGROUND & MOBILE STYLING (FIXED SYNTAX) ---
 st.markdown(
     """
     <style>
-    /* Premium Deep Sapphire Dark Gradient Background */
+    /* Premium Deep Sapphire Dark Gradient Background - Fixed Percentage Syntax */
     .stApp {
-        background: linear-gradient(135deg, #060c17 0%, #0b1528 50%, #03070e 100%);
+        background: linear-gradient(135deg, #060c17, #0b1528, #03070e);
     }
     
     /* Clean text styling over dark theme */
