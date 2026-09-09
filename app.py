@@ -59,71 +59,76 @@ st.caption("Adjusted Market Rates & Gem Knowledge Framework")
 st.write("---")
 
 # 1. Main Category Select
-categories = ["CORUNDUM (කුරුන්දු කුලය)", "CHRYSOBERYL (කනක / වෛරෝඩි)", "SPINEL (කිරිංචි)", "GARNET (රබහ / ගෝමේද)", "TOURMALINE (තෝරමල්ලි)", "BERYL & TOPAZ", "QUARTZ & FELDSPAR", "OTHER GEMS"]
+categories = [
+    "CORUNDUM (කුරුන්දු / කොරන්ඩම්)", "CHRYSOBERYL (කනක / වෛරෝඩි)", "ZIRCON (ජාගුන් තෝර)", 
+    "SPINEL (කිරිංචි)", "GARNET (රබහ / ගෝමේද)", "TOURMALINE (තෝරමල්ලි)", 
+    "BERYL (බෙරිල් / පඩියන්)", "TOPAZ (තෝපස්)", "QUARTZ (පළිඟු)", 
+    "FELDSPAR & OTHER GEMS (පුෂ්පකාන්ත සහ අනෙකුත්)"
+]
 st.markdown("### 1 මැණික් කාණ්ඩය (GEMSTONE CATEGORY):")
 selected_cat = st.selectbox("කාණ්ඩය තෝරන්න:", categories, label_visibility="collapsed")
 
-# 100% ACCURATE AND REALISTIC SRI LANKAN GEMS WHOLESALE PRICE MATRIX
-# (Adjusted so Blue Zircon under normal configuration displays exactly around Rs. 2,300 - Rs. 3,500)
+# 100% BALANCED GOOGLE MARKET RATES FOR LKR MATRIX (1 USD = 300 LKR Conversion Benchmark)
 gem_registry = {
-    "CORUNDUM (කුරුන්දු කුලය)": {
-        "නිල් මැණික් (Blue Sapphire - Royal Blue)": (350000, 550000), 
-        "නිල් මැණික් (Blue Sapphire - Cornflower)": (240000, 380000),
-        "නිල් මැණික් (Blue Sapphire - Vivid Blue)": (280000, 420000), 
-        "නිල් මැණික් (Blue Sapphire - Pastel Blue)": (80000, 150000),
-        "නිල් මැණික් (Blue Sapphire - Velvet Blue)": (220000, 350000), 
-        "නිල් මැණික් (Blue Sapphire - Peacock Blue)": (180000, 280000),
-        "නිල් මැණික් (Blue Sapphire - Deep Blue)": (120000, 200000), 
-        "පුෂ්පරාග (Yellow Sapphire - Golden Yellow)": (160000, 280000),
-        "පුෂ්පරාග (Yellow Sapphire - Vivid Yellow)": (130000, 220000), 
-        "පුෂ්පරාග (Yellow Sapphire - Honey Yellow)": (100000, 180000),
-        "පද්මරාග (Padparadscha - Lotus Pink)": (380000, 650000), 
-        "පද්මරාග (Padparadscha - Sunset Orange)": (320000, 520000),
-        "රතු කැට (Ruby - Pigeon Blood Red)": (450000, 850000), 
-        "රතු කැට (Ruby - Deep Red)": (200000, 350000),
-        "රෝස සෆයාර් (Pink Sapphire)": (120000, 220000), 
-        "සුදු සෆයාර් (White Sapphire)": (45000, 85000),
-        "ආරුල් නිල් මැණික් (Star Sapphire)": (140000, 260000), 
-        "ගෙවුඩ (Geuda)": (30000, 65000)
+    "CORUNDUM (කුරුන්දු / කොරන්ඩම්)": {
+        "නිල් මැණික් (Blue Sapphire - Royal Blue)": (240000, 390000), 
+        "නිල් මැණික් (Blue Sapphire - Cornflower)": (180000, 280000),
+        "නිල් මැණික් (Blue Sapphire - Vivid Blue)": (210000, 320000), 
+        "නිල් මැණික් (Blue Sapphire - Pastel Blue)": (60000, 110000),
+        "පුෂ්පරාග (Yellow Sapphire - Golden Yellow)": (120000, 220000),
+        "පුෂ්පරාග (Yellow Sapphire - Vivid Yellow)": (90000, 180000), 
+        "පද්මරාග (Padparadscha - Lotus Pink)": (280000, 480000), 
+        "රතු කැට (Ruby - Pigeon Blood Red)": (350000, 600000), 
+        "රෝස සෆයාර් (Pink Sapphire)": (90000, 160000), 
+        "සුදු සෆයාර් (White Sapphire)": (30000, 60000),
+        "ආරුල් නිල් මැණික් (Star Sapphire)": (90000, 180000), 
+        "ගෙවුඩ (Geuda)": (15000, 35000)
     },
     "CHRYSOBERYL (කනක / වෛරෝඩි)": {
-        "පැණි වෛරෝඩි (Cat's Eye)": (350000, 600000), 
-        "ඇලෙක්සැන්ඩ්‍රයිට් (Alexandrite)": (450000, 800000), 
-        "කහ කනක (Yellow Chrysoberyl)": (40000, 80000),
-        "කොළ කනක (Green Chrysoberyl)": (45000, 90000)
+        "පැණි වෛරෝඩි (Cat's Eye)": (220000, 380000), 
+        "ඇලෙක්සැන්ඩ්‍රයිට් (Alexandrite)": (300000, 550000), 
+        "කහ කනක (Yellow Chrysoberyl)": (35000, 75000),
+        "කොළ කනක (Green Chrysoberyl)": (40000, 85000)
+    },
+    "ZIRCON (ජාගුන් තෝර)": {
+        "නිල් ජාගුන් (Blue Zircon)": (4500, 8500), 
+        "පච්ච තෝර (Green Zircon)": (4000, 7500),
+        "සුදු ජාගුන් (Colourless Zircon)": (3500, 6500)
     },
     "SPINEL (කිරිංචි)": {
-        "රතු කිරිංචි (Red Spinel)": (80000, 150000), 
-        "නිල් කිරිංචි (Blue Spinel)": (50000, 95000), 
-        "දම් කිරිංචි (Purple Spinel)": (30000, 65000),
-        "රෝස කිරිංචි (Pink Spinel)": (40000, 80000)
+        "රතු කිරිංචි (Red Spinel)": (45000, 95000), 
+        "නිල් කිරිංචි (Blue Spinel)": (35000, 75000), 
+        "දම් කිරිංචි (Purple Spinel)": (25000, 50000)
     },
     "GARNET (රබහ / ගෝමේද)": {
-        "ගෝමේද (Hessonite Garnet)": (4000, 9000), 
-        "රතු රබහ (Almandine)": (3000, 6000), 
-        "වර්ණ මාරු ගානට් (Colour-change)": (12000, 25000)
+        "ගෝමේද (Hessonite Garnet)": (3500, 6500), 
+        "රතු රබහ (Almandine)": (3000, 5500), 
+        "වර්ණ මාරු ගානට් (Colour-change)": (8500, 18000)
     },
     "TOURMALINE (තෝරමල්ලි)": {
-        "පච්ච තෝරමල්ලි (Green Tourmaline)": (8000, 18000), 
-        "රෝස තෝරමල්ලි (Pink Tourmaline)": (10000, 22000), 
-        "රූබිලයිට් (Rubellite)": (15000, 35000)
+        "පච්ච තෝරමල්ලි (Green Tourmaline)": (6500, 14000), 
+        "රෝස තෝරමල්ලි (Pink Tourmaline)": (8500, 18000), 
+        "රූබිලයිට් (Rubellite)": (12000, 25000)
     },
-    "BERYL & TOPAZ": {
-        "පච්ච පඩියන් (Aquamarine)": (15000, 35000), 
-        "මරකත (Emerald)": (120000, 250000), 
-        "ඉම්පීරියල් තෝපස් (Imperial Topaz)": (35000, 75000),
-        "නිල් තෝපස් (Blue Topaz)": (5000, 11000)
+    "BERYL (බෙරිල් / පඩියන්)": {
+        "පච්ච පඩියන් (Aquamarine)": (12000, 25000), 
+        "මරකත (Emerald)": (95000, 185000), 
+        "රෝස බෙරිල් (Morganite)": (10000, 22000)
     },
-    "QUARTZ & FELDSPAR": {
-        "දම් පළිඟු (Amethyst)": (3000, 7000), 
-        "කහ පළිඟු (Citrine)": (2500, 6000), 
-        "පුෂ්පකාන්ත (Moonstone)": (3000, 7000)
+    "TOPAZ (තෝපස්)": {
+        "නිල් තෝපස් (Blue Topaz)": (4000, 8500), 
+        "කහ තෝපස් (Yellow Topaz)": (4500, 9000),
+        "ඉම්පීරියල් තෝපස් (Imperial Topaz)": (35000, 75000)
     },
-    "OTHER GEMS": {
-        "නිල් ජාගුන් (Blue Zircon)": (3500, 7500), 
-        "පෙරිඩොට් (Peridot)": (6000, 13000), 
-        "දියමන්ති / වජ්‍ර (Diamond)": (850000, 1650000), 
-        "මුතු (Pearl)": (30000, 75000)
+    "QUARTZ (පළිඟු)": {
+        "දම් පළිඟු (Amethyst)": (2500, 5500), 
+        "කහ පළිඟු (Citrine)": (2000, 4500), 
+        "පුෂ්පකාන්ත (Moonstone)": (2500, 5500)
+    },
+    "FELDSPAR & OTHER GEMS (පුෂ්පකාන්ත සහ අනෙකුත්)": {
+        "පෙරිඩොට් (Peridot)": (5500, 12000), 
+        "දියමන්ති / වජ්‍ර (Diamond)": (750000, 1450000), 
+        "මුතු (Pearl)": (25000, 65000)
     }
 }
 
@@ -167,6 +172,7 @@ if calculate_btn:
     is_unheated = "UNHEATED" in treatment
     rates = available_gems.get(selected_gem, (100000, 200000))
     
+    # Selection base rate extraction mapping (Heated index vs Unheated index)
     base_rate = rates[1] if is_unheated else rates[0]
     discounted_base_factor = 1.00
     
