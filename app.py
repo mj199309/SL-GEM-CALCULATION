@@ -84,7 +84,7 @@ categories = [
 st.markdown("### 1 මැණික් කාණ්ඩය (GEMSTONE CATEGORY):")
 selected_cat = st.selectbox("කාණ්ඩය තෝරන්න:", categories, label_visibility="collapsed")
 
-# 2. Dynamic Gemstone Sub-Type & Color Mapping Engine
+# 2. Dynamic Gemstone Sub-Type & Color Mapping Engine (Syntax Fixed)
 gem_registry = {
     "CORUNDUM (කුරුන්දු කුලය)": {
         "නිල් මැණික් (Blue Sapphire - Royal Blue)": (475000, 1150000),
@@ -129,7 +129,7 @@ gem_registry = {
         "කළු කිරිංචි (Black Spinel)": (25000, 25000)
     },
     "GARNET (රබහ / ගෝමේද)": {
-        "གෝමේද (Hessonite Garnet)": (45000, 90000),
+        "ගෝමේද (Hessonite Garnet)": (45000, 90000),
         "රතු රබහ (Almandine Garnet)": (35000, 75000),
         "රතු ගානට් (Pyrope Garnet)": (40000, 80000),
         "තැඹිලි ගානට් (Spessartine Garnet)": (60000, 130000),
@@ -190,7 +190,6 @@ st.markdown("### 2 මැණික් වර්ගය සහ වර්ණය (GE
 available_gems = gem_registry.get(selected_cat, {})
 selected_gem = st.selectbox("වර්ගය තෝරන්න:", list(available_gems.keys()), label_visibility="collapsed")
 
-# 3. Gemstone Cut
 cut_options = {
     "Round Cut (රවුන්ඩ් / බ්‍රිලියන්ට්) - 100%": 1.00,
     "Princess Cut (ප්‍රින්සස් / හතරැස් හැඩය) - 88%": 0.88,
