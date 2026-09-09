@@ -22,15 +22,6 @@ st.markdown(
     input, select, textarea {
         color: #e2f1ff !important;
     }
-    .metric-box {
-        background: linear-gradient(145deg, rgba(11, 28, 54, 0.9) 0%, rgba(4, 13, 26, 0.95) 100%);
-        border: 2px solid #00d2ff;
-        box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
-        padding: 30px;
-        border-radius: 16px;
-        text-align: center;
-        margin-top: 20px;
-    }
     </style>
     """,
     unsafe_allow_html=True
@@ -153,27 +144,26 @@ if st.button("💰 මිල ගණනය කරන්න (Calculate Value)"):
     max_range = final_discounted_value * 1.15
 
     st.write("---")
-    
     st.success("📊 ගණනය කරන ලද අවසාන තක්සේරුව සාර්ථකයි!")
     
-    # Premium Clean Display Card
-    html_card = f"""
-    <div class="metric-box">
-        <div style="font-size: 55px; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(0,210,255,0.5));">💎</div>
-        <p style="color: #ceddf0; font-size: 15px; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 1px;">තක්සේරුකළ වටිනාකම (Valuation)</p>
-        <h2 style="color: #2ecc71; margin: 0 0 15px 0; font-size: 32px; font-weight: bold; font-family: sans-serif;">LKR {final_discounted_value:,.2f}</h2>
+    # Bypassed st.markdown completely and used 100% isolated iframe components.html to prevent tags showing up
+    card_html_content = f"""
+    <div style="background: linear-gradient(145deg, #0b1c36 0%, #040d1a 100%); border: 2px solid #00d2ff; box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); padding: 25px; border-radius: 16px; text-align: center; font-family: 'Helvetica Neue', Arial, sans-serif;">
+        <div style="font-size: 45px; margin-bottom: 5px; filter: drop-shadow(0 0 8px rgba(0,210,255,0.6)); text-align: center;">💎</div>
+        <p style="color: #ceddf0; font-size: 14px; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 1px; text-align: center;">තක්සේරුකළ වටිනාකම (Valuation)</p>
+        <h2 style="color: #2ecc71; margin: 0 0 15px 0; font-size: 32px; font-weight: bold; text-align: center;">LKR {final_discounted_value:,.2f}</h2>
         
-        <div style="border-top: 1px solid rgba(0, 210, 255, 0.2); padding-top: 15px; margin-top: 15px;">
-            <p style="color: #e2f1ff; font-size: 16px; margin: 5px 0;">
-                <b>💰 වෙළඳපොළ සාධාරණ පරාසය:</b> <span style="color: #00d2ff; font-weight: bold;">LKR {min_range:,.2f} - LKR {max_range:,.2f}</span>
+        <div style="border-top: 1px solid rgba(0, 210, 255, 0.2); padding-top: 15px; text-align: left; padding-left: 10px; padding-right: 10px;">
+            <p style="color: #e2f1ff; font-size: 15px; margin: 8px 0;">
+                <b style="color: #ceddf0;">💰 වෙළඳපොළ සාධාරණ පරාසය:</b> <span style="color: #00d2ff; font-weight: bold;">LKR {min_range:,.2f} - LKR {max_range:,.2f}</span>
             </p>
-            <p style="color: #a4c5e6; font-size: 14px; margin: 5px 0;">
-                <b>📊 කැරට් එකක අගය (Per Carat):</b> LKR {per_carat_display:,.2f}
+            <p style="color: #e2f1ff; font-size: 14px; margin: 8px 0;">
+                <b style="color: #a4c5e6;">📊 කැරට් එකක අගය (Per Carat):</b> <span style="color: #e2f1ff;">LKR {per_carat_display:,.2f}</span>
             </p>
-            <p style="color: #a4c5e6; font-size: 14px; margin: 5px 0;">
-                <b>⚖️ මුළු බර ප්‍රමාණය:</b> <span style="color: #2ecc71; font-weight: bold;">{weight} Carats (Cts)</span>
+            <p style="color: #e2f1ff; font-size: 14px; margin: 8px 0;">
+                <b style="color: #a4c5e6;">⚖️ මුළු බර ප්‍රමාණය:</b> <span style="color: #2ecc71; font-weight: bold;">{weight} Carats (Cts)</span>
             </p>
         </div>
     </div>
     """
-    st.markdown(html_card, unsafe_allow_html=True)
+    components.html(card_html_content, height=280)
