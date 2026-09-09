@@ -1,33 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>MJ GEMS Admin Portal</title>
+    <!-- stlite CSS -->
+    <link rel="stylesheet" href="https://jsdelivr.net" />
+    <style>
+      /* --- PREMIUM FULL-SCREEN LOADING SCREEN (5 SECONDS) --- */
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #060c17 0%, #03070e 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+      }
+
+      /* 3D Rotating Gem Ring Spinner */
+      .gem-ring {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        animation: spinRing 2.5s linear infinite;
+        transform-style: preserve-3d;
+        perspective: 500px;
+      }
+
+      .gem-particle {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background: #00ffcc;
+        border-radius: 50%;
+        box-shadow: 0 0 15px #00ffcc, 0 0 25px #00d2ff;
+      }
+
+      /* Placing gems in a perfect ring layout */
+      .gem-particle:nth-child(1) { top: 0; left: 42px; background: #00d2ff; }
+      .gem-particle:nth-child(2) { top: 12px; left: 72px; background: #ff5252; }
+      .gem-particle:nth-child(3) { top: 42px; left: 84px; background: #ffeb3b; }
+      .gem-particle:nth-child(4) { top: 72px; left: 72px; background: #e040fb; }
+      .gem-particle:nth-child(5) { top: 84px; left: 42px; background: #00e676; }
+      .gem-particle:nth-child(6) { top: 72px; left: 12px; background: #ff9100; }
+      .gem-particle:nth-child(7) { top: 42px; left: 0; background: #00b0ff; }
+      .gem-particle:nth-child(8) { top: 12px; left: 12px; background: #ff4081; }
+
+      @keyframes spinRing {
+        0% { transform: rotate(0deg) rotateX(20deg); }
+        100% { transform: rotate(360deg) rotateX(20deg); }
+      }
+
+      /* Premium Text Glow for Loading Label */
+      .loading-text {
+        margin-top: 25px;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        color: #e2f1ff;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        animation: pulseText 1.5s ease-in-out infinite;
+      }
+
+      @keyframes pulseText {
+        0%, 100% { opacity: 0.5; text-shadow: 0 0 5px rgba(0,210,255,0.2); }
+        50% { opacity: 1; text-shadow: 0 0 15px rgba(0,210,255,0.6); }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sate-of-the-art Luxury Loader Matrix -->
+    <div id="loading-screen">
+      <div class="gem-ring">
+        <div class="gem-particle"></div>
+        <div class="gem-particle"></div>
+        <div class="gem-particle"></div>
+        <div class="gem-particle"></div>
+        <div class="gem-particle"></div>
+        <div class="gem-particle"></div>
+        <div class="gem-particle"></div>
+        <div class="gem-particle"></div>
+      </div>
+      <div class="loading-text">Loading...</div>
+    </div>
+
+    <div id="root"></div>
+
+    <!-- Script to fade out loader after exactly 5 seconds -->
+    <script>
+      setTimeout(function() {
+        var loader = document.getElementById('loading-screen');
+        if (loader) {
+          loader.style.transition = 'opacity 0.5s ease';
+          loader.style.opacity = '0';
+          setTimeout(function() { loader.style.display = 'none'; }, 500);
+        }
+      }, 5000); // 5000ms = 5 Seconds Duration
+    </script>
+
+    <!-- stlite JS -->
+    <script src="https://jsdelivr.net"></script>
+    <script>
+      stlite.mount({
+        requirements: ["streamlit"],
+        entrypoint: "app.py",
+        files: {
+          "app.py": `
 import streamlit as st
 import streamlit.components.v1 as components
 
-# Page configuration
+# Page configuration for desktop and mobile scaling
 st.set_page_config(page_title="MJ GEMS Admin Portal", page_icon="💎", layout="centered")
 
-# --- CUSTOM CSS FOR PREMIUM STYLING ---
+# --- CUSTOM CSS FOR LUXURY BACKGROUND & MOBILE STYLING ---
 st.markdown(
     """
     <style>
+    /* Premium Deep Sapphire Dark Gradient Background */
     .stApp {
         background: linear-gradient(135deg, #060c17 0%, #0b1528 50%, #03070e 100%);
     }
+    
+    /* Clean text styling over dark theme */
     h1, h2, h3, p, span, label, .stMarkdown {
         color: #e2f1ff !important;
     }
-    div[data-baseweb="select"], div[data-baseweb="input"], div[data-baseweb="radio"], div[data-baseweb="input-container"] {
-        background-color: rgba(15, 27, 49, 0.6) !important;
-        border: 1px solid rgba(0, 210, 255, 0.2) !important;
+    
+    /* Neon border applied to all viewports (Mobile Optimized) */
+    div[data-baseweb="select"], div[data-baseweb="input"], div[data-baseweb="radio"] {
+        background-color: rgba(15, 27, 49, 0.8) !important;
+        border: 1px solid rgba(0, 210, 255, 0.3) !important;
         border-radius: 8px !important;
     }
-    input, select, textarea {
-        color: #e2f1ff !important;
+    
+    /* Mobile select elements enhancement to prevent text overflow cutting */
+    div[data-baseweb="select"] span {
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+    
+    /* Premium metrics box decoration */
+    .metric-box {
+        background-color: rgba(0, 210, 255, 0.05);
+        border: 1px solid rgba(0, 210, 255, 0.3);
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        margin-top: 10px;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# --- 3D ROTATING TITLE EFFECT ---
+# --- 100% WORKING PURE HTML/CSS 3D ROTATING TITLE EFFECT ---
 components.html(
     """
     <div style="display: flex; justify-content: center; align-items: center; background: transparent; height: 140px; overflow: hidden;">
@@ -55,115 +188,79 @@ components.html(
     height=140,
 )
 
+# Subheader and Header
 st.subheader("💎 ලංකාවේ සැබෑ මැණික් මිල ගණනය යෙදුම")
-st.caption("Advanced Gem Valuation & Treatment Matrix (40% Discount Enabled)")
+st.caption("Adjusted Market Rates & Gem Cut Analytics")
 st.write("---")
 
-# BASE VALUES (පැරණි ඇප් එකේ මිල ගණන් වලට 100% ක් ගැලපෙන සේ සකසා ඇත)
-base_prices = {
-    "නිල් මැණික් (Blue Sapphire - Light Blue)": 65625,
-    "නිල් මැණික් (Blue Sapphire - Royal Blue)": 180000,
-    "නිල් මැණික් (Blue Sapphire - Cornflower Blue)": 150000,
-    "නිල් මැණික් (Blue Sapphire - Vivid Blue)": 140000,
-    "නිල් මැණික් (Blue Sapphire - Velvet Blue)": 130000,
-    "නිල් මැණික් (Blue Sapphire - Peacock Blue)": 120000,
-    "නිල් මැණික් (Blue Sapphire - Deep Blue)": 100000,
-    "නිල් මැණික් (Blue Sapphire - Medium Blue)": 85000,
-    "රතු කැට (Ruby - Pigeon Blood)": 200000,
-    "රතු කැට (Ruby - Vivid Red)": 180000,
-    "පුෂ්පරාග (Yellow Sapphire)": 90000,
-    "පද්මරාග (Padparadscha)": 190000,
-    "පැණි වෛරෝඩි (Cat's Eye)": 150000,
-    "මරකත (Emerald)": 130000
-}
+# --- GROUPING DATA INTO LOGICAL CATEGORIES TO FIX PHONE OVERFLOW ---
+st.markdown("### 1 මැණික් කාණ්ඩය (GEMSTONE CATEGORY):")
+categories = [
+    "CORUNDUM (කුරුන්දු / සෆයාර්)",
+    "CHRYSOBERYL (කනක / වෛරෝඩි)",
+    "SPINEL (කිරිංචි / ස්පිනෙල්)",
+    "GARNET (රබහ / ගෝමේද)",
+    "TOURMALINE (තෝරමල්ලි)",
+    "BERYL & TOPAZ (බෙරිල් සහ තෝපස්)",
+    "QUARTZ & FELDSPAR (පළිඟු / පුෂ්පකාන්ත)",
+    "OTHER GEMS (දුර්ලභ සහ අනෙකුත් මැණික් වර්ග)"
+]
+selected_cat = st.selectbox("කාණ්ඩය තෝරන්න (Select Group):", categories, label_visibility="collapsed")
 
-# 1. Main Gemstone Type & Color Category
-st.markdown("### 1 මැණික් වර්ගය සහ වර්ණය (GEMSTONE TYPE & COLOR):")
-selected_gem = st.selectbox("තෝරන්න (Select Gem):", list(base_prices.keys()), label_visibility="collapsed")
-
-# 2. Gemstone Cut
-st.markdown("### 2 කැපුම / හැඩය (GEMSTONE CUT):")
-cut_options = {
-    "Oval Brilliant Cut (Precision Cut) - 100%": 1.00,
-    "Round Cut (රවුන්ඩ් / බ්‍රිලියන්ට්) - 100%": 1.00,
-    "Princess Cut (හතරැස් හැඩය) - 0.88": 0.88,
-    "Cushion Cut (කුෂන් / කොට්ට හැඩය) - 0.75": 0.75,
-    "Native / Local Cut (සම්ප්‍රදායික දේශීය අත් කැපුම) - 0.40": 0.40
-}
-selected_cut = st.selectbox("තෝරන්න (Select Cut):", list(cut_options.keys()), label_visibility="collapsed")
-
-# 3. Stone Body Tone
-st.markdown("### 3 වර්ණ තීව්‍රතාවය (STONE BODY TONE):")
-tone_options = {
-    "Vibrant Tone (දීප්තිමත් වර්ණය) - 1.00": 1.00,
-    "Normal Tone (සාමාන්‍ය පැහැය) - 0.85": 0.85,
-    "Very Light / Pale Tone (ඉතා ලා පැහැති) - 0.40": 0.40
-}
-selected_tone = st.selectbox("තෝරන්න (Select Tone):", list(tone_options.keys()), label_visibility="collapsed")
-
-# 4. Gemstone Clarity
-st.markdown("### 4 පැහැදිලි බව (GEMSTONE CLARITY):")
-clarity_options = {
-    "100% Clean (Eye Clean / සම්පූර්ණ පිරිසිදු) - 1.00": 1.00,
-    "90% Clean (Minor inclusions / සුළු රොඩු) - 0.80": 0.80,
-    "75% Clean (Slightly Included) - 0.60": 0.60,
-    "50% Clean (Heavily Included) - 0.35": 0.35
-}
-selected_clarity = st.selectbox("තෝරන්න (Select Clarity):", list(clarity_options.keys()), label_visibility="collapsed")
-
-# 5. Treatment / Heat
-st.markdown("### 5 පදම් කිරීම (TREATMENT / HEAT):")
-treatment_options = {
-    "UNHEATED (ස්වභාවික නිල් / රත් නොකළ) - 1.00": 1.00,
-    "HEATED (සාමාන්‍ය පරිදි රත් කළ / තැම්බූ) - 0.60": 0.60,
-    "TREATED / DIFFUSED (රසායනික ප්‍රතිකර්ම කළ) - 0.25": 0.25
-}
-selected_treatment = st.radio("තෝරන්න (Select Treatment):", list(treatment_options.keys()), label_visibility="collapsed")
-
-# 6. Weight in Carats
-st.markdown("### 6 බර කැරට් ප්‍රමාණය (WEIGHT IN CARATS):")
-weight = st.number_input("කැරට් ප්‍රමාණය ඇතුලත් කරන්න (Enter Carats):", min_value=0.05, max_value=50.0, value=0.25, step=0.05)
-
-# --- CALCULATE LOGIC ---
-if st.button("💰 මිල ගණනය කරන්න (Calculate Value)"):
-    base_rate = base_prices[selected_gem]
-    cut_val = cut_options[selected_cut]
-    tone_val = tone_options[selected_tone]
-    clarity_val = clarity_options[selected_clarity]
-    treatment_val = treatment_options[selected_treatment]
-    
-    # Per Carat Calculation
-    per_carat_rate = base_rate * cut_val * tone_val * clarity_val * treatment_val
-    
-    # Total Valuation with 40% Discount
-    final_discounted_value = per_carat_rate * weight * 0.60
-    
-    # Per Carat Rate for display
-    per_carat_display = final_discounted_value / weight if weight > 0 else 0
-    min_range = final_discounted_value * 0.85
-    max_range = final_discounted_value * 1.15
-
-    st.write("---")
-    st.success("📊 ගණනය කරන ලද අවසාන තක්සේරුව සාර්ථකයි!")
-    
-    # Bypassed st.markdown completely and used 100% isolated iframe components.html to prevent tags showing up
-    card_html_content = f"""
-    <div style="background: linear-gradient(145deg, #0b1c36 0%, #040d1a 100%); border: 2px solid #00d2ff; box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); padding: 25px; border-radius: 16px; text-align: center; font-family: 'Helvetica Neue', Arial, sans-serif;">
-        <div style="font-size: 45px; margin-bottom: 5px; filter: drop-shadow(0 0 8px rgba(0,210,255,0.6)); text-align: center;">💎</div>
-        <p style="color: #ceddf0; font-size: 14px; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 1px; text-align: center;">තක්සේරුකළ වටිනාකම (Valuation)</p>
-        <h2 style="color: #2ecc71; margin: 0 0 15px 0; font-size: 32px; font-weight: bold; text-align: center;">LKR {final_discounted_value:,.2f}</h2>
-        
-        <div style="border-top: 1px solid rgba(0, 210, 255, 0.2); padding-top: 15px; text-align: left; padding-left: 10px; padding-right: 10px;">
-            <p style="color: #e2f1ff; font-size: 15px; margin: 8px 0;">
-                <b style="color: #ceddf0;">💰 වෙළඳපොළ සාධාරණ පරාසය:</b> <span style="color: #00d2ff; font-weight: bold;">LKR {min_range:,.2f} - LKR {max_range:,.2f}</span>
-            </p>
-            <p style="color: #e2f1ff; font-size: 14px; margin: 8px 0;">
-                <b style="color: #a4c5e6;">📊 කැරට් එකක අගය (Per Carat):</b> <span style="color: #e2f1ff;">LKR {per_carat_display:,.2f}</span>
-            </p>
-            <p style="color: #e2f1ff; font-size: 14px; margin: 8px 0;">
-                <b style="color: #a4c5e6;">⚖️ මුළු බර ප්‍රමාණය:</b> <span style="color: #2ecc71; font-weight: bold;">{weight} Carats (Cts)</span>
-            </p>
-        </div>
-    </div>
-    """
-    components.html(card_html_content, height=280)
+# Dynamic mapping arrays defined from Aruna Gems Chart
+gem_registry = {
+    "CORUNDUM (කුරුන්දු / සෆයාර්)": {
+        "නිල් මැණික් (Blue Sapphire)": (475000, 1150000),
+        "පුෂ්පරාග (Yellow Sapphire)": (250000, 600000),
+        "රෝස සෆයාර් (Pink Sapphire)": (180000, 420000),
+        "සුදු සෆයාර් (White Sapphire)": (65000, 150000),
+        "කොළ සෆයාර් (Green Sapphire)": (75000, 180000),
+        "පද්මරාග (Padparadscha)": (525000, 1500000),
+        "රතු කැට (Ruby)": (900000, 1850000),
+        "ආරුල් නිල් මැණික් (Star Sapphire)": (220000, 650000),
+        "ආරුල් රතු කැට (Star Ruby)": (350000, 850000),
+        "ගෙවුඩ (Geuda)": (50000, 120000),
+        "ඔට්ටු මැණික් (Ottu Sapphire)": (120000, 300000)
+    },
+    "CHRYSOBERYL (කනක / වෛරෝඩි)": {
+        "කහ කනක (Yellow Chrysoberyl)": (150000, 350000),
+        "කොළ කනක (Green Chrysoberyl)": (160000, 380000),
+        "පැණි වෛරෝඩි (Cat's Eye - Chrysoberyl)": (550000, 1300000),
+        "ඇලෙක්සැන්ඩ්‍රයිට් (Alexandrite)": (850000, 1950000),
+        "ඇලෙක්සැන්ඩ්‍රයිට් වෛරෝඩි (Alexandrite Cat's Eye)": (950000, 2200000)
+    },
+    "SPINEL (කිරිංචි / ස්පිනෙල්)": {
+        "රතු කිරිංචි (Red Spinel)": (360000, 360000),
+        "රෝස කිරිංචි (Pink Spinel)": (150000, 150000),
+        "නිල් කිරිංචි (Blue Spinel)": (180000, 180000),
+        "දම් කිරිංචි (Purple Spinel)": (120000, 120000),
+        "කළු කිරිංචි (Black Spinel)": (25000, 25000)
+    },
+    "GARNET (රබහ / ගෝමේද)": {
+        "රතු රබහ (Almandine Garnet)": (35000, 75000),
+        "ගෝමේද (Hessonite Garnet)": (45000, 90000),
+        "රතු ගානට් (Pyrope Garnet)": (40000, 80000),
+        "තැඹිලි ගානට් (Spessartine Garnet)": (60000, 130000),
+        "වර්ණ මාරු ගානට් (Colour-change Garnet)": (95000, 210000),
+        "ආරුල් ගානට් (Star Garnet)": (50000, 110000)
+    },
+    "TOURMALINE (තෝරමල්ලි)": {
+        "පච්ච තෝරමල්ලි (Green Tourmaline)": (75000, 160000),
+        "දුඹුරු තෝරමල්ලි (Brown Tourmaline)": (45000, 95000),
+        "කළු තෝරමල්ලි (Black Tourmaline)": (15000, 35000),
+        "රෝස තෝරමල්ලි (Pink Tourmaline)": (85000, 180000),
+        "රූබිලයිට් (Rubellite)": (125000, 270000),
+        "බහු වර්ණ තෝරමල්ලි (Multicoloured Tourmaline)": (90000, 195000)
+    },
+    "BERYL & TOPAZ (බෙරිල් සහ තෝපස්)": {
+        "පච්ච පඩියන් (Aquamarine)": (110000, 250000),
+        "මරකත (Emerald)": (400000, 950000),
+        "රන් පඩියන් (Golden Beryl)": (85000, 190000),
+        "රෝස බෙරිල් (Morganite)": (95000, 210000),
+        "සුදු බෙරිල් (Goshenite)": (35000, 75000),
+        "සුදු තෝපස් (Colourless Topaz)": (20000, 45000),
+        "කහ තෝපස් (Yellow Topaz)": (45000, 95000),
+        "ඉම්පීරියල් තෝපස් (Imperial Topaz)": (180000, 400000),
+        "නිල් තෝපස් (Blue Topaz)": (35000, 75000),
+        "රෝස තෝපස් (Pink Topaz)": (75000, 160000)
+    },
