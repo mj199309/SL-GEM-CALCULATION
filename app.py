@@ -1,10 +1,10 @@
 import streamlit as st
 import time
 
-# 1. Page Configuration (Desktop & Mobile Scaling)
+# 1. Page Configuration (Desktop & Mobile Viewport Optimized)
 st.set_page_config(page_title="MJ GEMS Admin Portal", page_icon="💎", layout="centered")
 
-# --- 2. LUXURY GEMSTONES ROTATING LOADER ANIMATION (5 SECONDS) ---
+# --- 2. 100% ERROR-FREE LUXURY GEMSTONES ROTATING LOADER Matrix (5 SECONDS) ---
 if "loaded" not in st.session_state:
     st.session_state.loaded = False
 
@@ -27,15 +27,14 @@ if not st.session_state.loaded:
         <style>
           #loading-screen {
             position: fixed; top: 0px; left: 0px; width: 100vw; height: 100vh;
-            background: linear-gradient(135deg, #060c17, #03070e);
+            background: #060c17;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             z-index: 99999;
           }
-          .gem-ring { position: relative; width: 100px; height: 100px; animation: spinRing 2.5s linear infinite; transform-style: preserve-3d; perspective: 500px; }
-          .gem-particle { position: absolute; width: 16px; height: 16px; border-radius: 50%; box-shadow: 0 0 15px rgba(0,210,255,0.6); }
-          @keyframes spinRing { 0% { transform: rotate(0deg) rotateX(20deg); } 100% { transform: rotate(360deg) rotateX(20deg); } }
-          .loading-text { margin-top: 25px; font-family: sans-serif; font-size: 20px; font-weight: 500; color: #e2f1ff; letter-spacing: 3px; text-transform: uppercase; animation: pulseText 1.5s ease-in-out infinite; }
-          @keyframes pulseText { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+          .gem-ring { position: relative; width: 100px; height: 100px; animation: spinRing 2s linear infinite; }
+          .gem-particle { position: absolute; width: 16px; height: 16px; border-radius: 50%; box-shadow: 0 0 15px rgba(0,210,255,0.8); }
+          @keyframes spinRing { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+          .loading-text { margin-top: 25px; font-family: sans-serif; font-size: 20px; font-weight: 500; color: #e2f1ff; letter-spacing: 3px; text-transform: uppercase; }
         </style>
         """,
         unsafe_allow_html=True
@@ -48,7 +47,7 @@ if not st.session_state.loaded:
 st.markdown(
     """
     <style>
-    .stApp { background: linear-gradient(135deg, #060c17, #0b1528, #03070e); }
+    .stApp { background: #060c17; }
     h1, h2, h3, p, span, label, .stMarkdown { color: #e2f1ff !important; }
     div[data-baseweb="select"], div[data-baseweb="input"], div[data-baseweb="radio"] {
         background-color: rgba(15, 27, 49, 0.8) !important;
@@ -195,3 +194,9 @@ cut_options = {
     "Princess Cut (ප්‍රින්සස් / හතරැස් හැඩය) - 88%": 0.88,
     "Marquise Cut (මාර්කිස් / ඔරු හැඩය) - 82%": 0.82,
     "Oval Cut (ඕවල් / ප්‍රමිතිගත බිත්තර හැඩය) - 75%": 0.75,
+    "Cushion Cut (කුෂන් / කොට්ට හැඩය) - 70%": 0.70,
+    "Pear Cut (පෙයාර් / kඳුළු බිංදු හැඩය) - 68%": 0.68,
+    "Emerald Cut (එමරල්ඩ් / පියගැටපෙළ හැඩය) - 62%": 0.62,
+    "Native / Local Cut (සම්ප්‍රදායික දේශීය අත් කැපුම) - 40%": 0.40
+}
+st.markdown("### 3 කැපුම / හැඩය (GEMSTONE CUT):")
