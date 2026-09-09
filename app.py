@@ -75,22 +75,22 @@ st.subheader("💎 ලංකාවේ සැබෑ මැණික් මිල 
 st.caption("Advanced Gem Valuation & Treatment Matrix (40% Discount Enabled)")
 st.write("---")
 
-# BASE VALUES (Recalculated to perfectly output LKR 2,100 for 0.25 Cts at selected metrics)
+# BASE VALUES (පැරණි ඇප් එකේ මිල ගණන් වලට 100% ක් ගැලපෙන සේ සකසා ඇත)
 base_prices = {
-    "නිල් මැණික් (Blue Sapphire - Light Blue)": 43750,
-    "නිල් මැණික් (Blue Sapphire - Royal Blue)": 150000,
-    "නිල් මැණික් (Blue Sapphire - Cornflower Blue)": 130000,
-    "නිල් මැණික් (Blue Sapphire - Vivid Blue)": 120000,
-    "නිල් මැණික් (Blue Sapphire - Velvet Blue)": 110000,
-    "නිල් මැණික් (Blue Sapphire - Peacock Blue)": 100000,
-    "නිල් මැණික් (Blue Sapphire - Deep Blue)": 90000,
-    "නිල් මැණික් (Blue Sapphire - Medium Blue)": 75000,
-    "රතු කැට (Ruby - Pigeon Blood)": 180000,
-    "රතු කැට (Ruby - Vivid Red)": 160000,
-    "පුෂ්පරාග (Yellow Sapphire)": 80000,
-    "පද්මරාග (Padparadscha)": 170000,
-    "පැණි වෛරෝඩි (Cat's Eye)": 140000,
-    "මරකත (Emerald)": 120000
+    "නිල් මැණික් (Blue Sapphire - Light Blue)": 65625,
+    "නිල් මැණික් (Blue Sapphire - Royal Blue)": 180000,
+    "නිල් මැණික් (Blue Sapphire - Cornflower Blue)": 150000,
+    "නිල් මැණික් (Blue Sapphire - Vivid Blue)": 140000,
+    "නිල් මැණික් (Blue Sapphire - Velvet Blue)": 130000,
+    "නිල් මැණික් (Blue Sapphire - Peacock Blue)": 120000,
+    "නිල් මැණික් (Blue Sapphire - Deep Blue)": 100000,
+    "නිල් මැණික් (Blue Sapphire - Medium Blue)": 85000,
+    "රතු කැට (Ruby - Pigeon Blood)": 200000,
+    "රතු කැට (Ruby - Vivid Red)": 180000,
+    "පුෂ්පරාග (Yellow Sapphire)": 90000,
+    "පද්මරාග (Padparadscha)": 190000,
+    "පැණි වෛරෝඩි (Cat's Eye)": 150000,
+    "මරකත (Emerald)": 130000
 }
 
 # 1. Main Gemstone Type & Color Category
@@ -102,37 +102,37 @@ st.markdown("### 2 කැපුම / හැඩය (GEMSTONE CUT):")
 cut_options = {
     "Oval Brilliant Cut (Precision Cut) - 100%": 1.00,
     "Round Cut (රවුන්ඩ් / බ්‍රිලියන්ට්) - 100%": 1.00,
-    "Princess Cut (හතරැස් හැඩය) - 88%": 0.88,
-    "Cushion Cut (කුෂන් / කොට්ට හැඩය) - 75%": 0.75,
-    "Native / Local Cut (සම්ප්‍රදායික දේශීය අත් කැපුම) - 40%": 0.40
+    "Princess Cut (හතරැස් හැඩය) - 0.88": 0.88,
+    "Cushion Cut (කුෂන් / කොට්ට හැඩය) - 0.75": 0.75,
+    "Native / Local Cut (සම්ප්‍රදායික දේශීය අත් කැපුම) - 0.40": 0.40
 }
 selected_cut = st.selectbox("තෝරන්න (Select Cut):", list(cut_options.keys()), label_visibility="collapsed")
 
 # 3. Stone Body Tone
 st.markdown("### 3 වර්ණ තීව්‍රතාවය (STONE BODY TONE):")
 tone_options = {
-    "Vibrant Tone (දීප්තිමත් වර්ණය) - 100%": 1.00,
-    "Normal Tone (සාමාන්‍ය පැහැය) - 85%": 0.85,
-    "Very Light / Pale Tone (ඉතා ලා පැහැති) - 40%": 0.40
+    "Vibrant Tone (දීප්තිමත් වර්ණය) - 1.00": 1.00,
+    "Normal Tone (සාමාන්‍ය පැහැය) - 0.85": 0.85,
+    "Very Light / Pale Tone (ඉතා ලා පැහැති) - 0.40": 0.40
 }
 selected_tone = st.selectbox("තෝරන්න (Select Tone):", list(tone_options.keys()), label_visibility="collapsed")
 
 # 4. Gemstone Clarity
 st.markdown("### 4 පැහැදිලි බව (GEMSTONE CLARITY):")
 clarity_options = {
-    "100% Clean (Eye Clean / සම්පූර්ණ පිරිසිදු) - 100%": 1.00,
-    "90% Clean (Minor inclusions / සුළු රොඩු) - 80%": 0.80,
-    "75% Clean (Slightly Included) - 60%": 0.60,
-    "50% Clean (Heavily Included) - 35%": 0.35
+    "100% Clean (Eye Clean / සම්පූර්ණ පිරිසිදු) - 1.00": 1.00,
+    "90% Clean (Minor inclusions / සුළු රොඩු) - 0.80": 0.80,
+    "75% Clean (Slightly Included) - 0.60": 0.60,
+    "50% Clean (Heavily Included) - 0.35": 0.35
 }
 selected_clarity = st.selectbox("තෝරන්න (Select Clarity):", list(clarity_options.keys()), label_visibility="collapsed")
 
 # 5. Treatment / Heat
 st.markdown("### 5 පදම් කිරීම (TREATMENT / HEAT):")
 treatment_options = {
-    "UNHEATED (ස්වභාවික නිල් / රත් නොකළ) - 100%": 1.00,
-    "HEATED (සාමාන්‍ය පරිදි රත් කළ / තැම්බූ) - 60%": 0.60,
-    "TREATED / DIFFUSED (රසායනික ප්‍රතිකර්ම කළ) - 25%": 0.25
+    "UNHEATED (ස්වභාවික නිල් / රත් නොකළ) - 1.00": 1.00,
+    "HEATED (සාමාන්‍ය පරිදි රත් කළ / තැම්බූ) - 0.60": 0.60,
+    "TREATED / DIFFUSED (රසායනික ප්‍රතිකර්ම කළ) - 0.25": 0.25
 }
 selected_treatment = st.radio("තෝරන්න (Select Treatment):", list(treatment_options.keys()), label_visibility="collapsed")
 
@@ -154,19 +154,17 @@ if st.button("💰 මිල ගණනය කරන්න (Calculate Value)"):
     # Total Valuation
     total_market_value = per_carat_rate * weight
     
-    # 40% Discount Applied Value (Aligned to match old app behavior)
+    # 40% Discount Applied Value
     final_discounted_value = total_market_value * 0.60
     
-    # Per Carat Rate formatting for display
+    # Display logic adjustments
     per_carat_display = final_discounted_value / weight if weight > 0 else 0
-    
-    # Generate Range Boundaries (±15% for fair market spread)
     min_range = final_discounted_value * 0.85
     max_range = final_discounted_value * 1.15
 
     st.write("---")
     
-    # Fixed string formatting bugs inside st.markdown
+    # Streamlit Markdown Injection Fix (Removed split function bugs)
     st.markdown(
         f"""
         <div class="metric-box">
@@ -180,11 +178,12 @@ if st.button("💰 මිල ගණනය කරන්න (Calculate Value)"):
             
             <div class="detail-container">
                 <h4 style="color: #00d2ff; margin: 0 0 8px 0; font-size: 14px; border-bottom: 1px solid rgba(0, 210, 255, 0.2); padding-bottom: 4px;">📝 සාරාංශය (Detail Box):</h4>
-                <p style="margin: 2px 0; font-size: 13px; color: #ceddf0;">💎 <b>වර්ගය:</b> {selected_gem}</p>
-                <p style="margin: 2px 0; font-size: 13px; color: #ceddf0;">✂️ <b>කැපුම:</b> {selected_cut}</p>
-                <p style="margin: 2px 0; font-size: 13px; color: #ceddf0;">🔍 <b>පැහැදිලි බව:</b> {selected_clarity}</p>
-                <p style="margin: 2px 0; font-size: 13px; color: #ceddf0;">🔥 <b>පදම් කිරීම:</b> {selected_treatment}</p>
-                <p style="margin: 2px 0; font-size: 13px; color: #ceddf0;">⚖️ <b>බර:</b> {weight} Cts</p>
+                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">💎 <b>වර්ගය:</b> {selected_gem}</p>
+                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">✂️ <b>කැපුම:</b> {selected_cut}</p>
+                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">🎨 <b>වර්ණ තීව්‍රතාවය:</b> {selected_tone}</p>
+                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">🔍 <b>පැහැදිලි බව:</b> {selected_clarity}</p>
+                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">🔥 <b>පදම් කිරීම:</b> {selected_treatment}</p>
+                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">⚖️ <b>බර:</b> {weight} Cts</p>
             </div>
         </div>
         """, 
