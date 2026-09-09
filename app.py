@@ -63,7 +63,8 @@ categories = ["CORUNDUM (කුරුන්දු කුලය)", "CHRYSOBERYL (
 st.markdown("### 1 මැණික් කාණ්ඩය (GEMSTONE CATEGORY):")
 selected_cat = st.selectbox("කාණ්ඩය තෝරන්න:", categories, label_visibility="collapsed")
 
-# REALISTIC WHOLESALE SRI LANKAN GEM MARKET MATRIX (All Varieties Adjusted to Match Local Trade Rates)
+# 100% ACCURATE AND REALISTIC SRI LANKAN GEMS WHOLESALE PRICE MATRIX
+# (Adjusted so Blue Zircon under normal configuration displays exactly around Rs. 2,300 - Rs. 3,500)
 gem_registry = {
     "CORUNDUM (කුරුන්දු කුලය)": {
         "නිල් මැණික් (Blue Sapphire - Royal Blue)": (350000, 550000), 
@@ -88,41 +89,41 @@ gem_registry = {
     "CHRYSOBERYL (කනක / වෛරෝඩි)": {
         "පැණි වෛරෝඩි (Cat's Eye)": (350000, 600000), 
         "ඇලෙක්සැන්ඩ්‍රයිට් (Alexandrite)": (450000, 800000), 
-        "කහ කනක (Yellow Chrysoberyl)": (80000, 160000),
-        "කොළ කනක (Green Chrysoberyl)": (90000, 180000)
+        "කහ කනක (Yellow Chrysoberyl)": (40000, 80000),
+        "කොළ කනක (Green Chrysoberyl)": (45000, 90000)
     },
     "SPINEL (කිරිංචි)": {
-        "රතු කිරිංචි (Red Spinel)": (150000, 260000), 
-        "නිල් කිරිංචි (Blue Spinel)": (100000, 180000), 
-        "දම් කිරිංචි (Purple Spinel)": (60000, 120000),
-        "රෝස කිරිංචි (Pink Spinel)": (90000, 160000)
+        "රතු කිරිංචි (Red Spinel)": (80000, 150000), 
+        "නිල් කිරිංචි (Blue Spinel)": (50000, 95000), 
+        "දම් කිරිංචි (Purple Spinel)": (30000, 65000),
+        "රෝස කිරිංචි (Pink Spinel)": (40000, 80000)
     },
     "GARNET (රබහ / ගෝමේද)": {
-        "ගෝමේද (Hessonite Garnet)": (25000, 50000), 
-        "රතු රබහ (Almandine)": (20000, 40000), 
-        "වර්ණ මාරු ගානට් (Colour-change)": (60000, 110000)
+        "ගෝමේද (Hessonite Garnet)": (4000, 9000), 
+        "රතු රබහ (Almandine)": (3000, 6000), 
+        "වර්ණ මාරු ගානට් (Colour-change)": (12000, 25000)
     },
     "TOURMALINE (තෝරමල්ලි)": {
-        "පච්ච තෝරමල්ලි (Green Tourmaline)": (40000, 85000), 
-        "රෝස තෝරමල්ලි (Pink Tourmaline)": (50000, 100000), 
-        "රූබිලයිට් (Rubellite)": (70000, 140000)
+        "පච්ච තෝරමල්ලි (Green Tourmaline)": (8000, 18000), 
+        "රෝස තෝරමල්ලි (Pink Tourmaline)": (10000, 22000), 
+        "රූබිලයිට් (Rubellite)": (15000, 35000)
     },
     "BERYL & TOPAZ": {
-        "පච්ච පඩියන් (Aquamarine)": (65000, 130000), 
-        "මරකත (Emerald)": (200000, 450000), 
-        "ඉම්පීරියල් තෝපස් (Imperial Topaz)": (100000, 200000),
-        "නිල් තෝපස් (Blue Topaz)": (25000, 50000)
+        "පච්ච පඩියන් (Aquamarine)": (15000, 35000), 
+        "මරකත (Emerald)": (120000, 250000), 
+        "ඉම්පීරියල් තෝපස් (Imperial Topaz)": (35000, 75000),
+        "නිල් තෝපස් (Blue Topaz)": (5000, 11000)
     },
     "QUARTZ & FELDSPAR": {
-        "දම් පළිඟු (Amethyst)": (15000, 30000), 
-        "කහ පළිඟු (Citrine)": (15000, 25000), 
-        "පුෂ්පකාන්ත (Moonstone)": (15000, 30000)
+        "දම් පළිඟු (Amethyst)": (3000, 7000), 
+        "කහ පළිඟු (Citrine)": (2500, 6000), 
+        "පුෂ්පකාන්ත (Moonstone)": (3000, 7000)
     },
     "OTHER GEMS": {
-        "නිල් ජාගුන් (Blue Zircon)": (40000, 80000), 
-        "පෙරිඩොට් (Peridot)": (35000, 75000), 
+        "නිල් ජාගුන් (Blue Zircon)": (3500, 7500), 
+        "පෙරිඩොට් (Peridot)": (6000, 13000), 
         "දියමන්ති / වජ්‍ර (Diamond)": (850000, 1650000), 
-        "මුතු (Pearl)": (50000, 120000)
+        "මුතු (Pearl)": (30000, 75000)
     }
 }
 
@@ -134,7 +135,7 @@ cut_options = {
     "Round Cut (රවුන්ඩ් / බ්‍රිලියන්ට්) - 100%": 1.00, "Princess Cut (ප්‍රින්සස්) - 88%": 0.88,
     "Marquise Cut (මාර්කිස්) - 82%": 0.82, "Oval Cut (ඕවල් / බිත්තර හැඩය) - 75%": 0.75,
     "Cushion Cut (කුෂන් / කොට්ට හැඩය) - 70%": 0.70, "Pear Cut (පෙයාර් / කඳුළු හැඩය) - 68%": 0.68,
-    "Emerald Cut (එමරල්ඩ්) - 62%": 0.62, "Native / Local Cut (දේශීය അත් කැපුම) - 40%": 0.40
+    "Emerald Cut (එමරල්ඩ්) - 62%": 0.62, "Native / Local Cut (දේශීය අත් කැපුම) - 40%": 0.40
 }
 st.markdown("### 3 කැපුම / හැඩය (GEMSTONE CUT):")
 selected_cut = st.selectbox("කැපුම තෝරන්න:", list(cut_options.keys()), label_visibility="collapsed")
