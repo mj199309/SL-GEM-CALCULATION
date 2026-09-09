@@ -84,7 +84,7 @@ categories = [
 st.markdown("### 1 මැණික් කාණ්ඩය (GEMSTONE CATEGORY):")
 selected_cat = st.selectbox("කාණ්ඩය තෝරන්න:", categories, label_visibility="collapsed")
 
-# 2. Dynamic Gemstone Sub-Type & Color Mapping Engine (Syntax Fixed)
+# 2. Dynamic Gemstone Sub-Type & Color Mapping Engine
 gem_registry = {
     "CORUNDUM (කුරුන්දු කුලය)": {
         "නිල් මැණික් (Blue Sapphire - Royal Blue)": (475000, 1150000),
