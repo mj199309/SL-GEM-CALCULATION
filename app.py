@@ -76,7 +76,7 @@
     </style>
   </head>
   <body>
-    <!-- Luxury Loader Dynamic Interface -->
+    <!-- Luxury Loader Interface -->
     <div id="loading-screen">
       <div class="gem-ring">
         <div class="gem-particle"></div>
@@ -123,7 +123,7 @@ st.set_page_config(page_title="MJ GEMS Admin Portal", page_icon="💎", layout="
 st.markdown(
     """
     <style>
-    /* Premium Deep Sapphire Dark Gradient Background - Fixed Percentage Syntax */
+    /* Fixed Python Decimal Literal Error by avoiding percentage symbols inside gradient */
     .stApp {
         background: linear-gradient(135deg, #060c17, #0b1528, #03070e);
     }
@@ -222,7 +222,7 @@ gem_registry = {
         "ගෙවුඩ (Geuda)": (50000, 120000),
         "ඔට්ටු මැණික් (Ottu Sapphire)": (120000, 300000)
     },
-    "CHRYSOBERYL (කනක / වෛරෝඩි)": {
+    "CHRYSOBERYL (kනක / වෛරෝඩි)": {
         "කහ කනක (Yellow Chrysoberyl)": (150000, 350000),
         "කොළ කනක (Green Chrysoberyl)": (160000, 380000),
         "පැණි වෛරෝඩි (Cat's Eye - Chrysoberyl)": (550000, 1300000),
@@ -230,11 +230,11 @@ gem_registry = {
         "ඇලෙක්සැන්ඩ්‍රයිට් වෛරෝඩි (Alexandrite Cat's Eye)": (950000, 2200000)
     },
     "SPINEL (කිරිංචි / ස්පිනෙල්)": {
-        "රතු කිරිංචි (Red Spinel)": (360000, 360000),
-        "රෝස කිරිංචි (Pink Spinel)": (150000, 150000),
-        "නිල් කිරිංචි (Blue Spinel)": (180000, 180000),
-        "දම් කිරිංචි (Purple Spinel)": (120000, 120000),
-        "කළු කිරිංචි (Black Spinel)": (25000, 25000)
+        "රතු kිරිංචි (Red Spinel)": (360000, 360000),
+        "රෝස kිරිංචි (Pink Spinel)": (150000, 150000),
+        "නිල් kිරිංචි (Blue Spinel)": (180000, 180000),
+        "දම් kිරිංචි (Purple Spinel)": (120000, 120000),
+        "කළු kිරිංචි (Black Spinel)": (25000, 25000)
     },
     "GARNET (රබහ / ගෝමේද)": {
         "රතු රබහ (Almandine Garnet)": (35000, 75000),
