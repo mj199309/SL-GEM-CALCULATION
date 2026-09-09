@@ -39,12 +39,22 @@ st.markdown(
         text-align: center;
         margin-top: 10px;
     }
+    
+    /* Detailed info box inside result */
+    .detail-container {
+        background-color: rgba(11, 21, 40, 0.8);
+        border: 1px solid rgba(0, 210, 255, 0.15);
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+        text-align: left;
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# --- 100% WORKING PURE HTML/CSS 3D ROTATING TITLE EFFECT ---
+# --- PURE HTML/CSS 3D ROTATING TITLE EFFECT ---
 components.html(
     """
     <div style="display: flex; justify-content: center; align-items: center; background: transparent; height: 140px; overflow: hidden;">
@@ -74,7 +84,7 @@ components.html(
 
 # Subheader and Header
 st.subheader("💎 ලංකාවේ සැබෑ මැණික් මිල ගණනය යෙදුම")
-st.caption("Adjusted Market Rates & Advanced Color Categories (40% Discount Enabled)")
+st.caption("Adjusted Market Rates, Advanced Analytics & Clarity Matrix (40% Discount Enabled)")
 st.write("---")
 
 # DATA CONFIGURATION WITH SUB-CATEGORIES
@@ -157,18 +167,31 @@ cut_options = {
 }
 selected_cut = st.selectbox("තෝරන්න (Select Cut):", list(cut_options.keys()), label_visibility="collapsed")
 
-# 4. Weight in Carats
-st.markdown("### 4 බර කැරට් ප්‍රමාණය (WEIGHT IN CARATS):")
+# 4. Gemstone Clarity Matix (NEWLY ADDED FACTOR)
+st.markdown("### 4 පැහැදිලි බව (GEMSTONE CLARITY):")
+clarity_options = {
+    "IF - Internally Flawless (කිසිදු කැළලක් නැති පිරිසිදු) - 100%": 1.00,
+    "VVS - Very Very Slightly Included (ඉතාම සුළු කැළැල්) - 90%": 0.90,
+    "VS - Very Slightly Included (සුළු කැළැල් සහිත) - 75%": 0.75,
+    "SI - Slightly Included (ඇසට පෙනෙන කැළැල් සහිත) - 50%": 0.50,
+    "I - Included (වැඩිපුර රොඩු/කැළැල් සහිත) - 25%": 0.25,
+    "Low Clarity (ඉතා අඩු පැහැදිලි බව) - 10%": 0.10
+}
+selected_clarity = st.selectbox("තෝරන්න (Select Clarity):", list(clarity_options.keys()), label_visibility="collapsed")
+
+# 5. Weight in Carats
+st.markdown("### 5 බර කැරට් ප්‍රමාණය (WEIGHT IN CARATS):")
 weight = st.number_input("කැරට් ප්‍රමාණය ඇතුලත් කරන්න (Enter Carats):", min_value=0.05, max_value=50.0, value=1.0, step=0.05)
 
-# --- PRICE CALCULATION LOGIC WITH 40% DISCOUNT ---
+# --- PRICE CALCULATION LOGIC ---
 if st.button("💰 මිල ගණනය කරන්න (Calculate Value)"):
     min_base, max_base = sub_categories[selected_sub]
     cut_multiplier = cut_options[selected_cut]
+    clarity_multiplier = clarity_options[selected_clarity]
     
-    # Calculate original market price boundaries
-    orig_min_price = min_base * weight * cut_multiplier
-    orig_max_price = max_base * weight * cut_multiplier
+    # Calculate original market price boundaries including clarity matrix
+    orig_min_price = min_base * weight * cut_multiplier * clarity_multiplier
+    orig_max_price = max_base * weight * cut_multiplier * clarity_multiplier
     
     # Apply 40% discount (Multiply by 0.60)
     final_min_price = orig_min_price * 0.60
@@ -177,16 +200,26 @@ if st.button("💰 මිල ගණනය කරන්න (Calculate Value)"):
     st.write("---")
     st.markdown("### 📊 ගණනය කරන ලද තක්සේරු මිල (Estimated Valuation):")
     
-    # Custom stylized container for final results
+    # Custom stylized container for final results with Details Box
     st.markdown(
         f"""
         <div class="metric-box">
             <span style='color: #ff5252; font-size: 14px; font-weight: bold; border: 1px solid #ff5252; padding: 2px 8px; border-radius: 4px;'>🔥 SPECIAL 40% DISCOUNT APPLIED</span>
             <h2 style='color: #00d2ff; margin: 15px 0 5px 0;'>LKR {final_min_price:,.2f} - LKR {final_max_price:,.2f}</h2>
-            <p style='color: #a4c5e6; font-size: 13px; margin: 5px 0 0 0;'>
-                වර්ගය: <b>{main_gem}</b> ({selected_sub}) | බර: <b>{weight} Cts</b><br>
-                මුල් වෙළඳපොළ මිල: <del style='color: #ff8a8a;'>LKR {orig_min_price:,.0f} - LKR {orig_max_price:,.0f}</del>
+            <p style='color: #ff8a8a; font-size: 13px; margin: 0;'>
+                මුල් වෙළඳපොළ මිල: <del>LKR {orig_min_price:,.0f} - LKR {orig_max_price:,.0f}</del>
             </p>
+            
+            <!-- DETAIL BOX START -->
+            <div class="detail-container">
+                <h4 style="color: #00d2ff; margin: 0 0 10px 0; font-size: 15px; border-bottom: 1px solid rgba(0, 210, 255, 0.2); padding-bottom: 5px;">📝 තක්සේරු විස්තර සාරාංශය (Detail Box):</h4>
+                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">💎 <b>ප්‍රධාන වර්ගය:</b> {main_gem}</p>
+                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">🎨 <b>වර්ණ ප්‍රභේදය:</b> {selected_sub}</p>
+                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">✂️ <b>කැපුම් හැඩය:</b> {selected_cut.split(')')[0] + ')'}</p>
+                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">🔍 <b>පැහැදිලි බව (Clarity):</b> {selected_clarity.split(')')[0] + ')'}</p>
+                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">⚖️ <b>බර ප්‍රමාණය:</b> {weight} Carats (Cts)</p>
+            </div>
+            <!-- DETAIL BOX END -->
         </div>
         """, 
         unsafe_allow_html=True
