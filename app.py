@@ -23,20 +23,27 @@ st.markdown(
         color: #e2f1ff !important;
     }
     .metric-box {
-        background-color: rgba(46, 204, 113, 0.1);
-        border: 1px solid #2ecc71;
-        padding: 25px;
-        border-radius: 12px;
+        background: linear-gradient(145deg, rgba(11, 28, 54, 0.9) 0%, rgba(4, 13, 26, 0.95) 100%);
+        border: 2px solid #00d2ff;
+        box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+        padding: 30px;
+        border-radius: 16px;
         text-align: center;
-        margin-top: 10px;
+        margin-top: 20px;
     }
-    .detail-container {
-        background-color: rgba(11, 21, 40, 0.8);
-        border: 1px solid rgba(0, 210, 255, 0.15);
-        padding: 15px;
-        border-radius: 8px;
-        margin-top: 15px;
-        text-align: left;
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(0, 210, 255, 0.1);
+        padding: 8px 0;
+        font-size: 14px;
+    }
+    .detail-label {
+        color: #a4c5e6;
+        font-weight: bold;
+    }
+    .detail-value {
+        color: #00d2ff;
     }
     </style>
     """,
@@ -164,28 +171,44 @@ if st.button("💰 මිල ගණනය කරන්න (Calculate Value)"):
 
     st.write("---")
     
-    # Streamlit Markdown Injection Fix (Removed split function bugs)
-    st.markdown(
-        f"""
-        <div class="metric-box">
-            <h3 style='color: #2ecc71; margin: 0; font-size: 22px;'>තක්සේරුකළ වටිනාකම: LKR {final_discounted_value:,.2f}</h3>
-            <p style='color: #a4c5e6; font-size: 15px; margin: 10px 0 5px 0;'>
-                <b>වෙළඳපොළ සාධාරණ පරාසය:</b> LKR {min_range:,.2f} - LKR {max_range:,.2f}
-            </p>
-            <p style='color: #ceddf0; font-size: 13px; margin: 0;'>
-                <b>කැරට් එකක අගය (Per Carat Rate):</b> LKR {per_carat_display:,.2f}
-            </p>
-            
-            <div class="detail-container">
-                <h4 style="color: #00d2ff; margin: 0 0 8px 0; font-size: 14px; border-bottom: 1px solid rgba(0, 210, 255, 0.2); padding-bottom: 4px;">📝 සාරාංශය (Detail Box):</h4>
-                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">💎 <b>වර්ගය:</b> {selected_gem}</p>
-                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">✂️ <b>කැපුම:</b> {selected_cut}</p>
-                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">🎨 <b>වර්ණ තීව්‍රතාවය:</b> {selected_tone}</p>
-                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">🔍 <b>පැහැදිලි බව:</b> {selected_clarity}</p>
-                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">🔥 <b>පදම් කිරීම:</b> {selected_treatment}</p>
-                <p style="margin: 3px 0; font-size: 13px; color: #ceddf0;">⚖️ <b>බර:</b> {weight} Cts</p>
-            </div>
+    # Render final output cleanly by completely bypassing custom HTML strings in st.markdown
+    st.markdown("### 📊 ගණනය කරන ලද අවසාන තක්සේරුව")
+    
+    # Creating a premium stylized card using clean safe HTML container layout
+    html_card = f"""
+    <div class="metric-box">
+        <div style="font-size: 50px; margin-bottom: 10px;">💎</div>
+        <h3 style="color: #2ecc71; margin: 0 0 5px 0; font-size: 26px; font-family: sans-serif;">LKR {final_discounted_value:,.2f}</h3>
+        <p style="color: #ceddf0; font-size: 14px; margin: 0 0 20px 0;">තක්සේරුකළ වටිනාකම (Valuation)</p>
+        
+        <div class="detail-row">
+            <span class="detail-label">⚖️ වෙළඳපොළ සාධාරණ පරාසය:</span>
+            <span class="detail-value" style="color: #e2f1ff; font-weight: bold;">LKR {min_range:,.2f} - LKR {max_range:,.2f}</span>
         </div>
-        """, 
-        unsafe_allow_html=True
-    )
+        <div class="detail-row">
+            <span class="detail-label">📊 කැරට් එකක අგය (Per Carat):</span>
+            <span class="detail-value">LKR {per_carat_display:,.2f}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">💎 මැණික් වර්ගය:</span>
+            <span class="detail-value">{selected_gem}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">✂️ කැපුම් හැඩය:</span>
+            <span class="detail-value">{selected_cut.split(' - ')[0]}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">🔍 පැහැදිලි බව (Clarity):</span>
+            <span class="detail-value">{selected_clarity.split(' - ')[0]}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">🔥 පදම් කිරීම (Treatment):</span>
+            <span class="detail-value">{selected_treatment.split(' - ')[0]}</span>
+        </div>
+        <div class="detail-row" style="border-bottom: none;">
+            <span class="detail-label">⚖️ බර ප්‍රමාණය:</span>
+            <span class="detail-value" style="color: #2ecc71; font-weight: bold;">{weight} Carats (Cts)</span>
+        </div>
+    </div>
+    """
+    st.markdown(html_card, unsafe_allow_html=True)
