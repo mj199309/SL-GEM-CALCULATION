@@ -1,5 +1,5 @@
-import streamlit as st
-import streamlit.components.v1 as components
+import streamlit st
+import streamlit.components.v1 components
 
 # Page configuration
 st.set_page_config(page_title="MJ GEMS Admin Portal", page_icon="💎", layout="centered")
@@ -30,20 +30,6 @@ st.markdown(
         border-radius: 16px;
         text-align: center;
         margin-top: 20px;
-    }
-    .detail-row {
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid rgba(0, 210, 255, 0.1);
-        padding: 8px 0;
-        font-size: 14px;
-    }
-    .detail-label {
-        color: #a4c5e6;
-        font-weight: bold;
-    }
-    .detail-value {
-        color: #00d2ff;
     }
     </style>
     """,
@@ -155,59 +141,39 @@ if st.button("💰 මිල ගණනය කරන්න (Calculate Value)"):
     clarity_val = clarity_options[selected_clarity]
     treatment_val = treatment_options[selected_treatment]
     
-    # Per Carat Calculation incorporating all factors
+    # Per Carat Calculation
     per_carat_rate = base_rate * cut_val * tone_val * clarity_val * treatment_val
     
-    # Total Valuation
-    total_market_value = per_carat_rate * weight
+    # Total Valuation with 40% Discount
+    final_discounted_value = per_carat_rate * weight * 0.60
     
-    # 40% Discount Applied Value
-    final_discounted_value = total_market_value * 0.60
-    
-    # Display logic adjustments
+    # Per Carat Rate for display
     per_carat_display = final_discounted_value / weight if weight > 0 else 0
     min_range = final_discounted_value * 0.85
     max_range = final_discounted_value * 1.15
 
     st.write("---")
     
-    # Render final output cleanly by completely bypassing custom HTML strings in st.markdown
-    st.markdown("### 📊 ගණනය කරන ලද අවසාන තක්සේරුව")
+    # Safe Pure Streamlit UI Display (Bypassed the problematic HTML details table)
+    st.success("📊 ගණනය කරන ලද අවසාන තක්සේරුව සාර්ථකයි!")
     
-    # Creating a premium stylized card using clean safe HTML container layout
+    # Premium Clean Display Card without the broken code blocks
     html_card = f"""
     <div class="metric-box">
-        <div style="font-size: 50px; margin-bottom: 10px;">💎</div>
-        <h3 style="color: #2ecc71; margin: 0 0 5px 0; font-size: 26px; font-family: sans-serif;">LKR {final_discounted_value:,.2f}</h3>
-        <p style="color: #ceddf0; font-size: 14px; margin: 0 0 20px 0;">තක්සේරුකළ වටිනාකම (Valuation)</p>
+        <div style="font-size: 55px; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(0,210,255,0.5));">💎</div>
+        <p style="color: #ceddf0; font-size: 15px; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 1px;">තක්සේරුකළ වටිනාකම (Valuation)</p>
+        <h2 style="color: #2ecc71; margin: 0 0 15px 0; font-size: 32px; font-weight: bold; font-family: sans-serif;">LKR {final_discounted_value:,.2f}</h2>
         
-        <div class="detail-row">
-            <span class="detail-label">⚖️ වෙළඳපොළ සාධාරණ පරාසය:</span>
-            <span class="detail-value" style="color: #e2f1ff; font-weight: bold;">LKR {min_range:,.2f} - LKR {max_range:,.2f}</span>
-        </div>
-        <div class="detail-row">
-            <span class="detail-label">📊 කැරට් එකක අგය (Per Carat):</span>
-            <span class="detail-value">LKR {per_carat_display:,.2f}</span>
-        </div>
-        <div class="detail-row">
-            <span class="detail-label">💎 මැණික් වර්ගය:</span>
-            <span class="detail-value">{selected_gem}</span>
-        </div>
-        <div class="detail-row">
-            <span class="detail-label">✂️ කැපුම් හැඩය:</span>
-            <span class="detail-value">{selected_cut.split(' - ')[0]}</span>
-        </div>
-        <div class="detail-row">
-            <span class="detail-label">🔍 පැහැදිලි බව (Clarity):</span>
-            <span class="detail-value">{selected_clarity.split(' - ')[0]}</span>
-        </div>
-        <div class="detail-row">
-            <span class="detail-label">🔥 පදම් කිරීම (Treatment):</span>
-            <span class="detail-value">{selected_treatment.split(' - ')[0]}</span>
-        </div>
-        <div class="detail-row" style="border-bottom: none;">
-            <span class="detail-label">⚖️ බර ප්‍රමාණය:</span>
-            <span class="detail-value" style="color: #2ecc71; font-weight: bold;">{weight} Carats (Cts)</span>
+        <div style="border-top: 1px solid rgba(0, 210, 255, 0.2); padding-top: 15px; margin-top: 15px;">
+            <p style="color: #e2f1ff; font-size: 16px; margin: 5px 0;">
+                <b>💰 වෙළඳපොළ සාධාරණ පරාසය:</b> <span style="color: #00d2ff; font-weight: bold;">LKR {min_range:,.2f} - LKR {max_range:,.2f}</span>
+            </p>
+            <p style="color: #a4c5e6; font-size: 14px; margin: 5px 0;">
+                <b>📊 කැරට් එකක අගය (Per Carat):</b> LKR {per_carat_display:,.2f}
+            </p>
+            <p style="color: #a4c5e6; font-size: 14px; margin: 5px 0;">
+                <b>⚖️ මුළු බර ප්‍රමාණය:</b> <span style="color: #2ecc71; font-weight: bold;">{weight} Carats (Cts)</span>
+            </p>
         </div>
     </div>
     """
