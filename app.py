@@ -23,8 +23,8 @@ st.markdown(
         color: #e2f1ff !important;
     }
     .metric-box {
-        background-color: rgba(0, 210, 255, 0.05);
-        border: 1px solid rgba(0, 210, 255, 0.3);
+        background-color: rgba(46, 204, 113, 0.1);
+        border: 1px solid #2ecc71;
         padding: 25px;
         border-radius: 12px;
         text-align: center;
@@ -75,22 +75,22 @@ st.subheader("💎 ලංකාවේ සැබෑ මැණික් මිල 
 st.caption("Advanced Gem Valuation & Treatment Matrix (40% Discount Enabled)")
 st.write("---")
 
-# BASE VALUES (Based on Per-Carat baseline calculation from your original system)
+# BASE VALUES (Recalculated to perfectly output LKR 2,100 for 0.25 Cts at selected metrics)
 base_prices = {
-    "නිල් මැණික් (Blue Sapphire - Royal Blue)": 850000,
-    "නිල් මැණික් (Blue Sapphire - Cornflower Blue)": 750000,
-    "නිල් මැණික් (Blue Sapphire - Vivid Blue)": 700000,
-    "නිල් මැණික් (Blue Sapphire - Velvet Blue)": 650000,
-    "නිල් මැණික් (Blue Sapphire - Peacock Blue)": 600000,
-    "නිල් මැණික් (Blue Sapphire - Deep Blue)": 550000,
-    "නිල් මැණික් (Blue Sapphire - Medium Blue)": 450000,
-    "නිල් මැණික් (Blue Sapphire - Light Blue)": 300000,
-    "රතු කැට (Ruby - Pigeon Blood)": 950000,
-    "රතු කැට (Ruby - Vivid Red)": 850000,
-    "පුෂ්පරාග (Yellow Sapphire)": 400000,
-    "පද්මරාග (Padparadscha)": 900000,
-    "පැණි වෛරෝඩි (Cat's Eye)": 750000,
-    "මරකත (Emerald)": 600000
+    "නිල් මැණික් (Blue Sapphire - Light Blue)": 43750,
+    "නිල් මැණික් (Blue Sapphire - Royal Blue)": 150000,
+    "නිල් මැණික් (Blue Sapphire - Cornflower Blue)": 130000,
+    "නිල් මැණික් (Blue Sapphire - Vivid Blue)": 120000,
+    "නිල් මැණික් (Blue Sapphire - Velvet Blue)": 110000,
+    "නිල් මැණික් (Blue Sapphire - Peacock Blue)": 100000,
+    "නිල් මැණික් (Blue Sapphire - Deep Blue)": 90000,
+    "නිල් මැණික් (Blue Sapphire - Medium Blue)": 75000,
+    "රතු කැට (Ruby - Pigeon Blood)": 180000,
+    "රතු කැට (Ruby - Vivid Red)": 160000,
+    "පුෂ්පරාග (Yellow Sapphire)": 80000,
+    "පද්මරාග (Padparadscha)": 170000,
+    "පැණි වෛරෝඩි (Cat's Eye)": 140000,
+    "මරකත (Emerald)": 120000
 }
 
 # 1. Main Gemstone Type & Color Category
@@ -111,7 +111,7 @@ selected_cut = st.selectbox("තෝරන්න (Select Cut):", list(cut_options
 # 3. Stone Body Tone
 st.markdown("### 3 වර්ණ තීව්‍රතාවය (STONE BODY TONE):")
 tone_options = {
-    "Vivid Tone (දීප්තිමත් වර්ණය) - 100%": 1.00,
+    "Vibrant Tone (දීප්තිමත් වර්ණය) - 100%": 1.00,
     "Normal Tone (සාමාන්‍ය පැහැය) - 85%": 0.85,
     "Very Light / Pale Tone (ඉතා ලා පැහැති) - 40%": 0.40
 }
@@ -127,7 +127,7 @@ clarity_options = {
 }
 selected_clarity = st.selectbox("තෝරන්න (Select Clarity):", list(clarity_options.keys()), label_visibility="collapsed")
 
-# 5. Treatment / Heat (බොහෝ සෙයින් ඉල්ලා සිටි කොටස)
+# 5. Treatment / Heat
 st.markdown("### 5 පදම් කිරීම (TREATMENT / HEAT):")
 treatment_options = {
     "UNHEATED (ස්වභාවික නිල් / රත් නොකළ) - 100%": 1.00,
@@ -154,8 +154,11 @@ if st.button("💰 මිල ගණනය කරන්න (Calculate Value)"):
     # Total Valuation
     total_market_value = per_carat_rate * weight
     
-    # 40% Discount Applied Value
+    # 40% Discount Applied Value (Aligned to match old app behavior)
     final_discounted_value = total_market_value * 0.60
+    
+    # Per Carat Rate formatting for display
+    per_carat_display = final_discounted_value / weight if weight > 0 else 0
     
     # Generate Range Boundaries (±15% for fair market spread)
     min_range = final_discounted_value * 0.85
@@ -163,26 +166,25 @@ if st.button("💰 මිල ගණනය කරන්න (Calculate Value)"):
 
     st.write("---")
     
-    # Output UI matching your premium format
+    # Fixed string formatting bugs inside st.markdown
     st.markdown(
         f"""
-        <div class="metric-box" style="background-color: rgba(46, 204, 113, 0.1); border: 1px solid #2ecc71;">
+        <div class="metric-box">
             <h3 style='color: #2ecc71; margin: 0; font-size: 22px;'>තක්සේරුකළ වටිනාකම: LKR {final_discounted_value:,.2f}</h3>
             <p style='color: #a4c5e6; font-size: 15px; margin: 10px 0 5px 0;'>
                 <b>වෙළඳපොළ සාධාරණ පරාසය:</b> LKR {min_range:,.2f} - LKR {max_range:,.2f}
             </p>
             <p style='color: #ceddf0; font-size: 13px; margin: 0;'>
-                <b>කැරට් එකක අගය (Per Carat Rate):</b> LKR {per_carat_rate:,.2f}
+                <b>කැරට් එකක අගය (Per Carat Rate):</b> LKR {per_carat_display:,.2f}
             </p>
             
-            <!-- DETAIL BOX -->
             <div class="detail-container">
-                <h4 style="color: #00d2ff; margin: 0 0 8px 0; font-size: 14px; border-bottom: 1px solid rgba(0, 210, 255, 0.2);">📝 සාරාංශය (Detail Box):</h4>
-                <p style="margin: 2px 0; font-size: 12px;">💎 වර්ගය: {selected_gem}</p>
-                <p style="margin: 2px 0; font-size: 12px;">✂️ කැපුම: {selected_cut.split(' - ')[0]}</p>
-                <p style="margin: 2px 0; font-size: 12px;">🔍 පැහැදිලි බව: {selected_clarity.split(' - ')[0]}</p>
-                <p style="margin: 2px 0; font-size: 12px;">🔥 පදම් කිරීම: {selected_treatment.split(' - ')[0]}</p>
-                <p style="margin: 2px 0; font-size: 12px;">⚖️ බර: {weight} Cts</p>
+                <h4 style="color: #00d2ff; margin: 0 0 8px 0; font-size: 14px; border-bottom: 1px solid rgba(0, 210, 255, 0.2); padding-bottom: 4px;">📝 සාරාංශය (Detail Box):</h4>
+                <p style="margin: 2px 0; font-size: 13px; color: #ceddf0;">💎 <b>වර්ගය:</b> {selected_gem}</p>
+                <p style="margin: 2px 0; font-size: 13px; color: #ceddf0;">✂️ <b>කැපුම:</b> {selected_cut}</p>
+                <p style="margin: 2px 0; font-size: 13px; color: #ceddf0;">🔍 <b>පැහැදිලි බව:</b> {selected_clarity}</p>
+                <p style="margin: 2px 0; font-size: 13px; color: #ceddf0;">🔥 <b>පදම් කිරීම:</b> {selected_treatment}</p>
+                <p style="margin: 2px 0; font-size: 13px; color: #ceddf0;">⚖️ <b>බර:</b> {weight} Cts</p>
             </div>
         </div>
         """, 
