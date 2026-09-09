@@ -78,12 +78,12 @@ st.write("---")
 categories = [
     "CORUNDUM (කුරුන්දු කුලය)", "CHRYSOBERYL (කනක / වෛරෝඩි)", "SPINEL (කිරිංචි / ස්පිනෙල්)",
     "GARNET (රබහ / ගෝමේද)", "TOURMALINE (තෝරමල්ලි)", "BERYL & TOPAZ (බෙරිල් සහ තෝපස්)",
-    "QUARTZ & FELDSPAR (פළිඟු / පුෂ්පකාන්ත)", "OTHER GEMS (දුර්ලභ සහ අනෙකුත් මැණික් වර්ග)"
+    "QUARTZ & FELDSPAR (පළිඟු / පුෂ්පකාන්ත)", "OTHER GEMS (දුර්ලභ සහ අනෙකුත් මැණික් වර්ග)"
 ]
 st.markdown("### 1 මැණික් කාණ්ඩය (GEMSTONE CATEGORY):")
 selected_cat = st.selectbox("කාණ්ඩය තෝරන්න:", categories, label_visibility="collapsed")
 
-# 2. Gemstone Sub-Type & Color Mapping Engine
+# 2. Dynamic Gemstone Sub-Type & Color Mapping Engine (All Syntax Errors Fixed)
 gem_registry = {
     "CORUNDUM (කුරුන්දු කුලය)": {
         "නිල් මැණික් (Blue Sapphire - Royal Blue)": (475000, 1150000),
