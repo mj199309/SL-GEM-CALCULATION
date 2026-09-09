@@ -1,5 +1,5 @@
-import streamlit st
-import streamlit.components.v1 components
+import streamlit as st
+import streamlit.components.v1 as components
 
 # Page configuration
 st.set_page_config(page_title="MJ GEMS Admin Portal", page_icon="💎", layout="centered")
@@ -154,10 +154,9 @@ if st.button("💰 මිල ගණනය කරන්න (Calculate Value)"):
 
     st.write("---")
     
-    # Safe Pure Streamlit UI Display (Bypassed the problematic HTML details table)
     st.success("📊 ගණනය කරන ලද අවසාන තක්සේරුව සාර්ථකයි!")
     
-    # Premium Clean Display Card without the broken code blocks
+    # Premium Clean Display Card
     html_card = f"""
     <div class="metric-box">
         <div style="font-size: 55px; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(0,210,255,0.5));">💎</div>
